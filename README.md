@@ -4,7 +4,7 @@ These projects were generated with [.NET](https://learn.microsoft.com/pl-pl/dotn
 
 ## Development server
 
-To start BE dev server run `dotnet run from 'be\FlightReservationsApi' directory.
+To start BE dev server run `dotnet run' from 'be\FlightReservationsApi' directory.
 To start FE dev server run `ng serve` from 'web' directory. Navigate to `http://localhost:4200/`.
 
 ## Build
