@@ -1,0 +1,9 @@
+<h1 mat-dialog-title class="title">{{DialogTitles.EDIT}}</h1>
+<mat-dialog-content class="col-container">
+    <app-reservations-list-item [formGroup]="reservationForm">
+    </app-reservations-list-item>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-raised-button color="primary" mat-dialog-close data-cy="cancel">{{ButtonNames.CANCEL}}</button>
+    <button mat-raised-button color="accent" (click)="closeDialog()" data-cy="save">{{ButtonNames.SAVE}}</button>
+</mat-dialog-actions>

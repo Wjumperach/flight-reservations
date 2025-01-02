@@ -1,0 +1,17 @@
+<ng-container *ngIf="!(loading | async); else spinner">
+    <div class="row-container">
+        <app-search
+        [searchedText]="searchedText"
+        (changeSearchedText)="changeSearchedText($event)"></app-search>
+    </div>
+    <app-reservations-list
+    [reservations]="searchedReservations"
+    (openAddDialog)="openAddDialog()"
+    (openUpdateDialog)="openUpdateDialog($event)"
+    (openDeleteDialog)="openDeleteDialog($event)"/>
+</ng-container>
+<ng-template #spinner>
+    <div class="spinner-container">
+        <mat-spinner class="spinner"></mat-spinner>
+    </div>
+</ng-template> 

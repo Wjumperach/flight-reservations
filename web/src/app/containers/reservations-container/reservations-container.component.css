@@ -1,0 +1,17 @@
+.row-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+.spinner-container {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.row {
+    width: auto;
+}
+

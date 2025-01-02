@@ -1,0 +1,19 @@
+services:
+  flight-reservations-be:
+    image: flight-reservations-be
+    build:
+      context: /be/FlightReservationsApi/
+      args:
+        - configuration=Debug
+    ports:
+      - 5281:5281
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    volumes:
+      - ./be/FlightReservationsApi/:/../data/
+  flight-reservations-fe:
+    image: flight-reservations-fe
+    build:
+      context: ./web
+    ports:
+      - 80:80

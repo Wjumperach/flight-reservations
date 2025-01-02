@@ -1,0 +1,73 @@
+<div [formGroup]="formGroup" class="col-container">
+    <input type="hidden" [formControl]="formGroup.controls['id']" data-cy="id">
+
+    <mat-form-field>
+        <mat-label>{{ReservationTableHeaders.FIRST_NAME}}</mat-label>
+        <input matInput minlength="2" maxlength="50" [formControl]="formGroup.controls['firstName']" data-cy="firstname">
+        @if (formGroup.controls['firstName'].hasError('required')) {
+            <mat-error>You must enter a value</mat-error>
+        }
+        @if (formGroup.controls['firstName'].hasError('minlength')) {
+            <mat-error>You must enter at least 2 letters</mat-error>
+        }
+        @if (formGroup.controls['firstName'].hasError('pattern')) {
+            <mat-error>Not a valid first name</mat-error>
+        }
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>{{ReservationTableHeaders.LAST_NAME}}</mat-label>
+        <input matInput minlength="2" maxlength="50" [formControl]="formGroup.controls['lastName']" data-cy="lastname">
+        @if (formGroup.controls['lastName'].hasError('required')) {
+            <mat-error>You must enter a value</mat-error>
+        }
+        @if (formGroup.controls['lastName'].hasError('minlength')) {
+            <mat-error>You must enter at least 2 letters</mat-error>
+        }
+        @if (formGroup.controls['lastName'].hasError('pattern')) {
+            <mat-error>Not a valid last name</mat-error>
+        }
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>{{ReservationTableHeaders.FLIGHT_NUMBER}}</mat-label>
+        <input matInput minlenght="2" maxlength="6" [formControl]="formGroup.controls['flightNumber']" data-cy="flightNumber">
+        @if (formGroup.controls['flightNumber'].hasError('required')) {
+            <mat-error>You must enter a value</mat-error>
+        }
+        @if (formGroup.controls['flightNumber'].hasError('minlength')) {
+            <mat-error>You must enter at least 2 letters</mat-error>
+        }
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>{{ReservationTableHeaders.DEPARTURE_DATE}} - {{ReservationTableHeaders.ARRIVAL_DATE}}</mat-label>
+        <mat-date-range-input [rangePicker]="picker">
+            <input matStartDate [max]="today" placeholder="{{ReservationTableHeaders.DEPARTURE_DATE}}" [formControl]="formGroup.controls['departureDate']">
+            <input matEndDate [max]="today" placeholder="{{ReservationTableHeaders.ARRIVAL_DATE}}" [formControl]="formGroup.controls['arrivalDate']">
+        </mat-date-range-input>
+        <mat-hint>YYYY-MM-DD – YYYY-MM-DD</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker">
+                <mat-icon matDatepickerToggleIcon color="primary">today</mat-icon>
+            </mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+        @if (formGroup.controls['departureDate'].hasError('required')) {
+            <mat-error>You must enter departure date</mat-error>
+        }
+        @if (formGroup.controls['arrivalDate'].hasError('required')) {
+            <mat-error>You must enter arrival date</mat-error>
+        }
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>{{ReservationTableHeaders.TICKET_CLASS}}</mat-label>
+        <mat-select [formControl]="formGroup.controls['ticketClass']" data-cy="ticketClass">
+            @for (ticketClass of ticketClasses; track ticketClass.id) {
+                <mat-option [value]="+ticketClass.id">{{ticketClass.name}}</mat-option>
+            }
+        </mat-select>
+        @if (formGroup.controls['ticketClass'].hasError('required')) {
+            <mat-error>You must select a value</mat-error>
+        }
+    </mat-form-field>
+</div>
