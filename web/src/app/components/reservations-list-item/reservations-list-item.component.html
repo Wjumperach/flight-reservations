@@ -42,9 +42,9 @@
 
     <mat-form-field>
         <mat-label>{{ReservationTableHeaders.DEPARTURE_DATE}} - {{ReservationTableHeaders.ARRIVAL_DATE}}</mat-label>
-        <mat-date-range-input [rangePicker]="picker">
-            <input matStartDate [max]="today" placeholder="{{ReservationTableHeaders.DEPARTURE_DATE}}" [formControl]="formGroup.controls['departureDate']">
-            <input matEndDate [max]="today" placeholder="{{ReservationTableHeaders.ARRIVAL_DATE}}" [formControl]="formGroup.controls['arrivalDate']">
+        <mat-date-range-input [rangePicker]="picker" [min]="today">
+            <input matStartDate placeholder="{{ReservationTableHeaders.DEPARTURE_DATE}}" [formControl]="formGroup.controls['departureDate']">
+            <input matEndDate placeholder="{{ReservationTableHeaders.ARRIVAL_DATE}}" [formControl]="formGroup.controls['arrivalDate']">
         </mat-date-range-input>
         <mat-hint>YYYY-MM-DD – YYYY-MM-DD</mat-hint>
             <mat-datepicker-toggle matIconSuffix [for]="picker">
