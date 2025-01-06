@@ -11,6 +11,7 @@ import { DatePipe } from '@angular/common';
 import { Reservation } from '../../models/reservation';
 import { ToTicketClassPipe } from '../../pipes/toticketclass.pipe';
 import { ListTitles, ButtonNames, ReservationFormFields, ReservationTableHeaders, TableMessages } from '../../consts/consts';
+import { DATE_FORMAT, DATE_FORMATS } from '../../reservation.configuration';
 
 @Component({
   selector: 'app-reservations-list',
@@ -54,6 +55,8 @@ export class ReservationsListComponent implements OnInit, OnDestroy, AfterViewIn
   readonly ReservationFormFields = ReservationFormFields;
   readonly ReservationTableHeaders = ReservationTableHeaders;
   readonly TableMessages = TableMessages;
+  readonly DATE_FORMAT = DATE_FORMAT;
+  readonly dateFormats = DATE_FORMATS;
 
   displayedColumns: string[] = [
     //ReservationFormFields.ID, // Oczywiście można też wyświetlać tę kolumnę

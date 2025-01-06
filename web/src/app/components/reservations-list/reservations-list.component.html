@@ -28,12 +28,12 @@
 a
         <ng-container matColumnDef="{{ReservationFormFields.DEPARTURE_DATE}}">
             <th mat-header-cell *matHeaderCellDef mat-sort-header class="title"> {{ReservationTableHeaders.DEPARTURE_DATE}} </th>
-            <td mat-cell *matCellDef="let element"><mat-icon color="primary">flight_takeoff</mat-icon> {{element.departureDate | date: 'yyyy-MM-dd'}} </td>
+            <td mat-cell *matCellDef="let element"><mat-icon color="primary">flight_takeoff</mat-icon> {{element.departureDate | date: DATE_FORMAT}} </td>
         </ng-container>
 
         <ng-container matColumnDef="{{ReservationFormFields.ARRIVAL_DATE}}">
             <th mat-header-cell *matHeaderCellDef mat-sort-header class="title"> {{ReservationTableHeaders.ARRIVAL_DATE}} </th>
-            <td mat-cell *matCellDef="let element"><mat-icon color="primary">flight_land</mat-icon> {{element.arrivalDate | date: 'yyyy-MM-dd'}} </td>
+            <td mat-cell *matCellDef="let element"><mat-icon color="primary">flight_land</mat-icon> {{element.arrivalDate | date: DATE_FORMAT}} </td>
         </ng-container>
 
         <ng-container matColumnDef="{{ReservationFormFields.TICKET_CLASS}}">

@@ -1,7 +1,7 @@
 import { createFeatureSelector, createSelector, MemoizedSelector } from '@ngrx/store';
 import { DatePipe } from '@angular/common';
 
-import { FEATURE_KEY } from '../../reservation.configuration';
+import { FEATURE_KEY, DATE_FORMAT } from '../../reservation.configuration';
 import { ReservationsState } from '../reducers/reservations.reducer';
 import { Reservation } from '../../models/reservation';
 import { TicketClasses } from '../../models/ticketclass';
@@ -27,8 +27,8 @@ export const selectSearchedReservations: MemoizedSelector<ReservationsState, Res
                 reservation.firstName.toLowerCase().indexOf(searchedText!) > -1 ||
                 reservation.lastName.toLowerCase().indexOf(searchedText!) > -1 ||
                 reservation.flightNumber.toLowerCase().indexOf(searchedText!) > -1 ||
-                datePipe.transform(reservation.departureDate, 'yyyy-MM-dd')!.indexOf(searchedText!) > -1 ||
-                datePipe.transform(reservation.arrivalDate, 'yyyy-MM-dd')!.indexOf(searchedText!) > -1 ||
+                datePipe.transform(reservation.departureDate, DATE_FORMAT)!.indexOf(searchedText!) > -1 ||
+                datePipe.transform(reservation.arrivalDate, DATE_FORMAT)!.indexOf(searchedText!) > -1 ||
                 TicketClasses.find((t) => reservation.ticketClass === t.id)!.name.toLowerCase().indexOf(searchedText!) > -1
             );
     }

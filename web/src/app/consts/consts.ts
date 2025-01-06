@@ -52,3 +52,11 @@ export const DialogTitles = {
     SUCCESS: 'SUCCESS',
     ERROR: 'ERROR', 
 }
+
+export const ErrorMessages = {
+    REQUIRED: 'You must enter a value',
+    MIN_LENGTH: 'You must enter at least 2 letters',
+    VALUE_NOT_VALID: 'The value is not valid',
+    DEPARTURE_DATE_REQUIRED: 'You must enter departure date',
+    ARRIVAL_DATE_REQUIRED: 'You must enter arrival date'
+}

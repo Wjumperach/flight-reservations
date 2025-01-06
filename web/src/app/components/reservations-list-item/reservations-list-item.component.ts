@@ -9,7 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 
 import { ReservationForm } from '../../services/reservation-form/reservations-form.service';
 import { TicketClasses } from '../../models/ticketclass';
-import { ReservationFormFields, ReservationTableHeaders } from '../../consts/consts';
+import { ReservationFormFields, ReservationTableHeaders, ErrorMessages } from '../../consts/consts';
 
 @Component({
   selector: 'app-reservations-list-item',
@@ -33,7 +33,8 @@ import { ReservationFormFields, ReservationTableHeaders } from '../../consts/con
 export class ReservationsListItemComponent {
   readonly ReservationFormFields = ReservationFormFields;
   readonly ReservationTableHeaders = ReservationTableHeaders;
-  readonly ticketClasses = TicketClasses;
+  readonly TicketClasses = TicketClasses;
+  readonly ErrorMessages = ErrorMessages;
 
   @Input()
   formGroup!: ReservationForm;

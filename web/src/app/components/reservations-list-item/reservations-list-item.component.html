@@ -5,13 +5,13 @@
         <mat-label>{{ReservationTableHeaders.FIRST_NAME}}</mat-label>
         <input matInput minlength="2" maxlength="50" [formControl]="formGroup.controls.firstName" data-cy="firstname">
         @if (formGroup.controls.firstName.hasError('required')) {
-            <mat-error>You must enter a value</mat-error>
+            <mat-error>{{ErrorMessages.REQUIRED}}</mat-error>
         }
         @if (formGroup.controls.firstName.hasError('minlength')) {
-            <mat-error>You must enter at least 2 letters</mat-error>
+            <mat-error>{{ErrorMessages.MIN_LENGTH}}</mat-error>
         }
         @if (formGroup.controls.firstName.hasError('pattern')) {
-            <mat-error>Not a valid first name</mat-error>
+            <mat-error>{{ErrorMessages.VALUE_NOT_VALID}}</mat-error>
         }
     </mat-form-field>
 
@@ -19,13 +19,13 @@
         <mat-label>{{ReservationTableHeaders.LAST_NAME}}</mat-label>
         <input matInput minlength="2" maxlength="50" [formControl]="formGroup.controls.lastName" data-cy="lastname">
         @if (formGroup.controls.lastName.hasError('required')) {
-            <mat-error>You must enter a value</mat-error>
+            <mat-error>{{ErrorMessages.REQUIRED}}</mat-error>
         }
         @if (formGroup.controls.lastName.hasError('minlength')) {
-            <mat-error>You must enter at least 2 letters</mat-error>
+            <mat-error>{{ErrorMessages.MIN_LENGTH}}</mat-error>
         }
         @if (formGroup.controls.lastName.hasError('pattern')) {
-            <mat-error>Not a valid last name</mat-error>
+            <mat-error>{{ErrorMessages.VALUE_NOT_VALID}}</mat-error>
         }
     </mat-form-field>
 
@@ -33,10 +33,10 @@
         <mat-label>{{ReservationTableHeaders.FLIGHT_NUMBER}}</mat-label>
         <input matInput minlenght="2" maxlength="6" [formControl]="formGroup.controls.flightNumber" data-cy="flightNumber">
         @if (formGroup.controls.flightNumber.hasError('required')) {
-            <mat-error>You must enter a value</mat-error>
+            <mat-error>{{ErrorMessages.REQUIRED}}</mat-error>
         }
         @if (formGroup.controls.flightNumber.hasError('minlength')) {
-            <mat-error>You must enter at least 2 letters</mat-error>
+            <mat-error>{{ErrorMessages.MIN_LENGTH}}</mat-error>
         }
     </mat-form-field>
 
@@ -52,22 +52,22 @@
             </mat-datepicker-toggle>
         <mat-date-range-picker #picker></mat-date-range-picker>
         @if (formGroup.controls.departureDate.hasError('required')) {
-            <mat-error>You must enter departure date</mat-error>
+            <mat-error>{{ErrorMessages.DEPARTURE_DATE_REQUIRED}}</mat-error>
         }
         @if (formGroup.controls.arrivalDate.hasError('required')) {
-            <mat-error>You must enter arrival date</mat-error>
+            <mat-error>{{ErrorMessages.ARRIVAL_DATE_REQUIRED}}</mat-error>
         }
     </mat-form-field>
 
     <mat-form-field>
         <mat-label>{{ReservationTableHeaders.TICKET_CLASS}}</mat-label>
         <mat-select [formControl]="formGroup.controls.ticketClass" data-cy="ticketClass">
-            @for (ticketClass of ticketClasses; track ticketClass.id) {
+            @for (ticketClass of TicketClasses; track ticketClass.id) {
                 <mat-option [value]="+ticketClass.id">{{ticketClass.name}}</mat-option>
             }
         </mat-select>
         @if (formGroup.controls.ticketClass.hasError('required')) {
-            <mat-error>You must select a value</mat-error>
+            <mat-error>{{ErrorMessages.REQUIRED}}</mat-error>
         }
     </mat-form-field>
 </div>
