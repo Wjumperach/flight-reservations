@@ -6,3 +6,9 @@
     display: flex;
     flex-direction: row;
 }
+mat-icon.search {
+    margin-right: 4px;
+}
+mat-icon.clear {
+    cursor: pointer;
+}

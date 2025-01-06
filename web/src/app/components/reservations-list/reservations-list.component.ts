@@ -10,7 +10,7 @@ import { DatePipe } from '@angular/common';
 
 import { Reservation } from '../../models/reservation';
 import { ToTicketClassPipe } from '../../pipes/toticketclass.pipe';
-import { ButtonNames, ReservationFormFields, ReservationTableHeaders } from '../../consts/consts';
+import { ListTitles, ButtonNames, ReservationFormFields, ReservationTableHeaders, TableMessages } from '../../consts/consts';
 
 @Component({
   selector: 'app-reservations-list',
@@ -49,9 +49,11 @@ export class ReservationsListComponent implements OnInit, OnDestroy, AfterViewIn
   @ViewChild(MatPaginator) 
   paginator: MatPaginator | null = null;
 
+  readonly ListTitles = ListTitles;
   readonly ButtonNames = ButtonNames;
   readonly ReservationFormFields = ReservationFormFields;
   readonly ReservationTableHeaders = ReservationTableHeaders;
+  readonly TableMessages = TableMessages;
 
   displayedColumns: string[] = [
     //ReservationFormFields.ID, // Oczywiście można też wyświetlać tę kolumnę

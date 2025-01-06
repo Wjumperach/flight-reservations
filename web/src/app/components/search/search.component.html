@@ -1,9 +1,9 @@
 <div [formGroup]="searchForm" class="container">
     <mat-form-field>
       <div class="row-container">
-        <input matInput [formControl]="searchForm.controls['searchedText']" (input)="onChangeSearchedText()" data-cy="searchedtext">
-        <mat-icon color="primary">search</mat-icon>
+        <mat-icon color="primary" fontIcon="search" class="search"></mat-icon>
+        <input matInput [formControl]="searchForm.controls.searchedText" (input)="onChangeSearchedText()" data-cy="searchedtext">
+        <mat-icon color="primary" fontIcon="close" class="clear" (click)="onClearSearchedText()">close</mat-icon>
       </div>
     </mat-form-field>
 </div>
-

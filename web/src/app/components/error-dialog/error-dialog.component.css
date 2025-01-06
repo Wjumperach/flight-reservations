@@ -2,3 +2,6 @@
     color: white;
     background-color: rgb(63, 81, 181);
   }
+.amat-mdc-dialog-title {
+  background-color: var(--mat-primary);
+}

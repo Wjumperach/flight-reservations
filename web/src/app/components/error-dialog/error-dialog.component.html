@@ -1,6 +1,11 @@
-<h2 mat-dialog-title class="title">{{DialogTitles.ERROR}}</h2>
-<div mat-dialog-content>{{error?.title}}</div>
-<div mat-dialog-actions align="end">
-  <button mat-raised-button color="primary" mat-dialog-close data-cy="cancel">{{ButtonNames.CANCEL}}</button>
-</div>
-
+<h2 mat-dialog-title class="title">{{error?.title}}</h2>
+<mat-dialog-content>
+  @for (error of (this.error | toErrorList); track error) {
+    <div>
+      {{ error.field }}: {{ error.message }}
+    </div>
+  }
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button color="primary" mat-dialog-close data-cy="close">{{ButtonNames.CLOSE}}</button>
+</mat-dialog-actions>

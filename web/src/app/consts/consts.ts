@@ -30,17 +30,25 @@ export const ReservationTableHeaders = {
     ACTIONS: 'Actions'
 }
 
+export const TableMessages = {
+    NO_DATA: "No data matching the filter."
+}
+
 export const Messages = {
-    CONFIRMATION: 'Are you sure you want to delete this reservation?',
+    CONFIRM: 'The reservation will be deleted permanently',
     INFO_ADDED: 'Reservation has been added.',
     INFO_UPTDATED: 'Reservation has been updated.',
     INFO_DELETED: 'Reservation has been deleted.',
 }
 
+export const ListTitles = {
+    RESERVATIONS: 'RESERVATIONS'
+}
+
 export const DialogTitles = {
     ADD: 'ADD',
     EDIT: 'EDIT',
-    CONFIRM: 'CONFIRM',
+    CONFIRM: 'Are you sure you want to delete?',
     SUCCESS: 'SUCCESS',
     ERROR: 'ERROR', 
 }

@@ -36,7 +36,7 @@ export class SearchComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this._destroy$)) 
       .subscribe(
         (searchedText) => {
-          this.searchForm.controls['searchedText'].setValue(searchedText ?? '');
+          this.searchForm.controls.searchedText.setValue(searchedText ?? '');
         }
       )
   }
@@ -46,7 +46,11 @@ export class SearchComponent implements OnInit, OnDestroy {
     this._destroy$.complete();
   }
 
-  onChangeSearchedText(): void{
-    this.changeSearchedText.emit(this.searchForm.controls['searchedText'].value);
+  onChangeSearchedText(): void {
+    this.changeSearchedText.emit(this.searchForm.controls.searchedText.value);
+  }
+
+  onClearSearchedText(): void {
+    this.changeSearchedText.emit('');
   }
 }

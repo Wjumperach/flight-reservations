@@ -3,4 +3,5 @@ export interface Error {
     title: string;
     status: number;
     traceId: string;
+    errors?: [];
 }

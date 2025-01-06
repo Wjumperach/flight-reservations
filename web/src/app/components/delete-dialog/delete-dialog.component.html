@@ -1,6 +1,6 @@
 <h1 mat-dialog-title class="title">{{DialogTitles.CONFIRM}}</h1>
-<div mat-dialog-content>{{message}}</div>
-<div mat-dialog-actions align="end">
-    <button mat-raised-button color="primary" (click)="closeDialog()" data-cy="confirm">{{ButtonNames.OK}}</button>
+<mat-dialog-content>{{Messages.CONFIRM}}</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-raised-button color="warn" (click)="closeDialog()" data-cy="confirm">{{ButtonNames.OK}}</button>
     <button mat-raised-button color="primary" mat-dialog-close data-cy="cancel">{{ButtonNames.CANCEL}}</button>
-</div>
+</mat-dialog-actions>

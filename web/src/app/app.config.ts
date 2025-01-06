@@ -5,11 +5,13 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideEffects } from '@ngrx/effects';
+import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
+import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 
 import { routes } from './app.routes';
 import { reservationsReducer } from './ngrx/reducers/reservations.reducer';
 import { ReservationsEffects } from './ngrx/effects/reservations.effects';
-import { provideClientHydration } from '@angular/platform-browser';
+import { DATE_FORMATS } from './reservation.configuration';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -19,6 +21,9 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     provideStore({ ReservationsStore: reservationsReducer }),
     provideEffects(ReservationsEffects),
-    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }), provideAnimationsAsync(), provideClientHydration()
+    { provide: DateAdapter, useClass: MomentDateAdapter },
+    { provide: MAT_DATE_FORMATS, useValue: DATE_FORMATS },
+    { provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true } },
+    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }), provideAnimationsAsync()
   ]
 };

@@ -95,7 +95,6 @@ export class ReservationsEffects implements OnDestroy {
           reservation
         },
       });
-      dialogRef.componentInstance.message = Messages.CONFIRMATION;
       return dialogRef.afterClosed();
     }),
     map((reservation) => {
