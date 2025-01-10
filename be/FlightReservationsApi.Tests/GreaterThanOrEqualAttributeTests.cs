@@ -10,7 +10,7 @@ public class GreaterThanOrEqualDateAttributeTests
     {
         public DateTime StartDate { get; set; }
 
-        [DateGreaterThanOrEqual("StartDate")]
+        [DateGreaterThanOrEqualThan("StartDate")]
         public DateTime EndDate { get; set; }
     }
 
@@ -25,7 +25,7 @@ public class GreaterThanOrEqualDateAttributeTests
         };
 
         var context = new ValidationContext(model) { MemberName = "EndDate" };
-        var attribute = new DateGreaterThanOrEqualAttribute("StartDate");
+        var attribute = new DateGreaterThanOrEqualThanAttribute("StartDate");
 
         // Act
         var result = attribute.GetValidationResult(model.EndDate, context);
@@ -45,7 +45,7 @@ public class GreaterThanOrEqualDateAttributeTests
         };
 
         var context = new ValidationContext(model) { MemberName = "EndDate" };
-        var attribute = new DateGreaterThanOrEqualAttribute("StartDate");
+        var attribute = new DateGreaterThanOrEqualThanAttribute("StartDate");
 
         // Act
         var result = attribute.GetValidationResult(model.EndDate, context);
@@ -65,14 +65,14 @@ public class GreaterThanOrEqualDateAttributeTests
         };
 
         var context = new ValidationContext(model) { MemberName = "EndDate" };
-        var attribute = new DateGreaterThanOrEqualAttribute("StartDate");
+        var attribute = new DateGreaterThanOrEqualThanAttribute("StartDate");
 
         // Act
         var result = attribute.GetValidationResult(model.EndDate, context);
 
         // Assert
         Assert.NotNull(result);
-        Assert.Equal("EndDate must be greater than or equal to StartDate.", result.ErrorMessage);
+        Assert.Equal("EndDate must be greater than or equal to StartDate", result.ErrorMessage);
     }
 
     [Fact]
@@ -86,14 +86,14 @@ public class GreaterThanOrEqualDateAttributeTests
         };
 
         var context = new ValidationContext(model) { MemberName = "EndDate" };
-        var attribute = new DateGreaterThanOrEqualAttribute("NonExistentProperty");
+        var attribute = new DateGreaterThanOrEqualThanAttribute("NonExistentProperty");
 
         // Act & Assert
         var exception = Assert.Throws<ArgumentException>(() =>
             attribute.GetValidationResult(model.EndDate, context)
         );
 
-        Assert.Equal("Property with name NonExistentProperty not found.", exception.Message);
+        Assert.Equal("Property with name NonExistentProperty not found", exception.Message);
     }
 }
   

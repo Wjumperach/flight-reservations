@@ -62,8 +62,8 @@ public class ReservationService : IReservationService
             reservation.FirstName = updatedReservation.FirstName;
             reservation.LastName = updatedReservation.LastName;
             reservation.FlightNumber = updatedReservation.FlightNumber;
-            reservation.DepartureDate = updatedReservation.DepartureDate;
-            reservation.ArrivalDate = updatedReservation.ArrivalDate;
+            reservation.DepartureDateTime = updatedReservation.DepartureDateTime;
+            reservation.ArrivalDateTime = updatedReservation.ArrivalDateTime;
             reservation.TicketClass = updatedReservation.TicketClass;
 
             await SaveReservationsAsync(reservations);

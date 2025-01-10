@@ -22,7 +22,7 @@ describe('SearchFormService', () => {
       const form: SearchForm = service.buildForm(searchname);
   
       expect(form).toBeInstanceOf(FormGroup);
-      expect(form.controls['searchname'].value).toBe(searchname);
+      expect(form.controls['searchedText'].value).toBe(searchname);
     });
   })
 });

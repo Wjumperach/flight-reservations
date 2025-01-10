@@ -40,24 +40,87 @@
         }
     </mat-form-field>
 
-    <mat-form-field>
-        <mat-label>{{ReservationTableHeaders.DEPARTURE_DATE}} - {{ReservationTableHeaders.ARRIVAL_DATE}}</mat-label>
-        <mat-date-range-input [rangePicker]="picker" [min]="today">
-            <input matStartDate placeholder="{{ReservationTableHeaders.DEPARTURE_DATE}}" [formControl]="formGroup.controls.departureDate">
-            <input matEndDate placeholder="{{ReservationTableHeaders.ARRIVAL_DATE}}" [formControl]="formGroup.controls.arrivalDate">
-        </mat-date-range-input>
-        <mat-hint>YYYY-MM-DD – YYYY-MM-DD</mat-hint>
-            <mat-datepicker-toggle matIconSuffix [for]="picker">
+    <div class="row-container">
+        <mat-form-field class="date-container">
+            <mat-label>{{ReservationTableHeaders.DEPARTURE_DATE}}</mat-label>
+            <input matInput [formControl]="formGroup.controls.departureDate" [min]="today" [matDatepicker]="pickerDepartureDate">
+            <mat-hint>{{DATE_FORMATS.display.dateInput}}</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="pickerDepartureDate">
                 <mat-icon matDatepickerToggleIcon color="primary">today</mat-icon>
             </mat-datepicker-toggle>
-        <mat-date-range-picker #picker></mat-date-range-picker>
-        @if (formGroup.controls.departureDate.hasError('required')) {
-            <mat-error>{{ErrorMessages.DEPARTURE_DATE_REQUIRED}}</mat-error>
-        }
-        @if (formGroup.controls.arrivalDate.hasError('required')) {
-            <mat-error>{{ErrorMessages.ARRIVAL_DATE_REQUIRED}}</mat-error>
-        }
-    </mat-form-field>
+            <mat-datepicker #pickerDepartureDate></mat-datepicker>
+            @if (formGroup.controls.departureDate.hasError('required')) {
+                <mat-error>{{ErrorMessages.REQUIRED}}</mat-error>
+            }
+            @if (formGroup.controls.departureDate.hasError('invalidDate')) {
+                <mat-error>{{ErrorMessages.VALUE_NOT_VALID}}</mat-error>
+            }
+            @if (formGroup.controls.departureDate.hasError('notFromFuture')) {
+                <mat-error>{{ErrorMessages.NOT_FROM_FUTURE}}</mat-error>
+            }
+          </mat-form-field>
+    
+          <mat-form-field class="time-container">
+            <mat-label>{{ReservationTableHeaders.DEPARTURE_TIME}}</mat-label>
+            <input matInput [formControl]="formGroup.controls.departureTime" [matTimepicker]="pickerDepartureTime">
+            <mat-hint>{{DATE_FORMATS.display.timeInput}}</mat-hint>
+            <mat-timepicker-toggle matIconSuffix [for]="pickerDepartureTime">
+                <mat-icon matTimepickerToggleIcon color="primary">schedule</mat-icon>
+            </mat-timepicker-toggle>
+            <mat-timepicker #pickerDepartureTime/>
+            @if (formGroup.controls.departureTime.hasError('required')) {
+                <mat-error>{{ErrorMessages.REQUIRED}}</mat-error>
+            }
+            @if (formGroup.controls.departureTime.hasError('invalidDate')) {
+                <mat-error>{{ErrorMessages.VALUE_NOT_VALID}}</mat-error>
+            }
+          </mat-form-field>
+    </div>
+
+    @if (formGroup.hasError('invalidDateRange')) {
+        <mat-error class="error">Arrival date must be greater than or equal to Departure date</mat-error>
+    }
+
+    <div class="row-container">
+        <mat-form-field class="date-container">
+            <mat-label>{{ReservationTableHeaders.ARRIVAL_DATE}}</mat-label>
+            <input matInput [formControl]="formGroup.controls.arrivalDate" [min]="today" [matDatepicker]="pickerArrivalDate">
+            <mat-hint>{{DATE_FORMATS.display.dateInput}}</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="pickerArrivalDate">
+                <mat-icon matDatepickerToggleIcon color="primary">today</mat-icon>
+            </mat-datepicker-toggle>
+            <mat-datepicker #pickerArrivalDate></mat-datepicker>
+            @if (formGroup.controls.arrivalDate.hasError('required')) {
+                <mat-error>{{ErrorMessages.REQUIRED}}</mat-error>
+            }
+            @if (formGroup.controls.arrivalDate.hasError('invalidDate')) {
+                <mat-error>{{ErrorMessages.VALUE_NOT_VALID}}</mat-error>
+            }
+            @if (formGroup.controls.arrivalDate.hasError('notFromFuture')) {
+                <mat-error>{{ErrorMessages.NOT_FROM_FUTURE}}</mat-error>
+            }
+          </mat-form-field>
+    
+          <mat-form-field class="time-container">
+            <mat-label>{{ReservationTableHeaders.ARRIVAL_TIME}}</mat-label>
+            <input matInput [formControl]="formGroup.controls.arrivalTime" [matTimepicker]="pickerArrivalTime">
+            <mat-hint>{{DATE_FORMATS.display.timeInput}}</mat-hint>
+            <mat-timepicker-toggle matIconSuffix [for]="pickerArrivalTime">
+                <mat-icon matTimepickerToggleIcon color="primary">schedule</mat-icon>
+            </mat-timepicker-toggle>
+            <mat-timepicker #pickerArrivalTime/>
+            @if (formGroup.controls.arrivalTime.hasError('required')) {
+                <mat-error>{{ErrorMessages.REQUIRED}}</mat-error>
+            }
+            @if (formGroup.controls.arrivalTime.hasError('invalidDate')) {
+                <mat-error>{{ErrorMessages.VALUE_NOT_VALID}}</mat-error>
+            }
+          </mat-form-field>
+    </div>
+
+    @if (formGroup.hasError('invalidDateRange')) {
+        <mat-error class="error">Arrival date must be greater than or equal to Departure date</mat-error>
+    }
 
     <mat-form-field>
         <mat-label>{{ReservationTableHeaders.TICKET_CLASS}}</mat-label>

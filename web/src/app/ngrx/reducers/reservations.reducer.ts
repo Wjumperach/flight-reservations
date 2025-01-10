@@ -2,19 +2,33 @@ import { ActionReducer, createReducer, on } from '@ngrx/store';
 
 import { Reservation } from '../../models/reservation';
 import { ReservationsActions, SearchActions } from '../actions/reservations.actions';
-import { Error } from '../../models/error';
+import { ProblemDetails } from '../../models/problemdetails';
+import { Sort } from '../../models/sort';
 
 export interface ReservationsState {
   reservations: Reservation[];
   loading: boolean;
-  error: Error | null;
+  problemDetails: ProblemDetails | null;
+  sort: Sort;
+  pageInfo: {
+    pageIndex: number;
+    pageSize: number;
+  };
   searchedText: string;
 }
 
 export const initialState: ReservationsState = {
   reservations: [],
   loading: false,
-  error: null,
+  problemDetails: null,
+  sort: {
+    active: '',
+    direction: ''
+  },
+  pageInfo: {
+    pageIndex: 0,
+    pageSize: 10,
+  },
   searchedText: '',
 };
 
@@ -28,21 +42,21 @@ export const reservationsReducer: ActionReducer<ReservationsState> = createReduc
     }
   }),
 
-  on(ReservationsActions.getAllSuccess, (state: ReservationsState, action) => {
+  on(ReservationsActions.getAllSuccess, (state: ReservationsState, { reservations }) => {
     return {
       ...state,
-      reservations: action.reservations,
+      reservations,
       loading: false,
-      error: null
+      problemDetails: null
     }
   }),
 
-  on(ReservationsActions.getAllError, (state: ReservationsState, action) => {
+  on(ReservationsActions.getAllError, (state: ReservationsState, { problemDetails }) => {
     return {
       ...state,
       reservations: [],
       loading: false,
-      error: action.error
+      problemDetails
     }
   }),
 
@@ -57,15 +71,15 @@ export const reservationsReducer: ActionReducer<ReservationsState> = createReduc
     return {
       ...state,
       loading: false,
-      error: null
+      problemDetails: null
     }
   }),
 
-  on(ReservationsActions.getByIdError, (state: ReservationsState, action) => {
+  on(ReservationsActions.getByIdError, (state: ReservationsState, { problemDetails }) => {
     return {
       ...state,
       loading: false,
-      error: action.error
+      problemDetails
     }
   }),
 
@@ -85,15 +99,15 @@ export const reservationsReducer: ActionReducer<ReservationsState> = createReduc
         }
       ],
       loading: false,
-      error: null
+      problemDetails: null
     }
   }),
 
-  on(ReservationsActions.addError, (state: ReservationsState, action) => {
+  on(ReservationsActions.addError, (state: ReservationsState, { problemDetails }) => {
     return {
       ...state,
       loading: false,
-      error: action.error
+      problemDetails
     }
   }),
 
@@ -109,15 +123,15 @@ export const reservationsReducer: ActionReducer<ReservationsState> = createReduc
       ...state,
       reservations: state.reservations.map(r => (r.id === reservation.id ? reservation : r)),
       loading: false,
-      error: null
+      problemDetails: null
     }
   }),
 
-  on(ReservationsActions.updateError, (state: ReservationsState, action) => {
+  on(ReservationsActions.updateError, (state: ReservationsState, { problemDetails }) => {
     return {
       ...state,
       loading: false,
-      error: action.error
+      problemDetails
     }
   }),
 
@@ -128,27 +142,41 @@ export const reservationsReducer: ActionReducer<ReservationsState> = createReduc
     }
   }),
 
-  on(ReservationsActions.deleteSuccess, (state: ReservationsState, action) => {
+  on(ReservationsActions.deleteSuccess, (state: ReservationsState, { id }) => {
     return {
       ...state,
-      reservations: state.reservations.filter(r => r.id != action.id),
+      reservations: state.reservations.filter(r => r.id != id),
       loading: false,
-      error: null
+      prbblemDetails: null
     }
   }),
 
-  on(ReservationsActions.deleteError, (state: ReservationsState, action) => {
+  on(ReservationsActions.deleteError, (state: ReservationsState, { problemDetails }) => {
     return {
       ...state,
       loading: false,
-      error: action.error
+      problemDetails
     }
   }),
 
-  on(SearchActions.changeText, (state: ReservationsState, { searchedText }) => {
+  on(ReservationsActions.sort, (state: ReservationsState, { sort }) => {
     return {
       ...state,
-      searchedText: searchedText,
+      sort
+    }
+  }),
+
+  on(ReservationsActions.setPageInfo, (state: ReservationsState, { pageInfo }) => {
+    return {
+      ...state,
+      pageInfo
+    }
+  }),
+
+  on(SearchActions.setSearchedText, (state: ReservationsState, { searchedText }) => {
+    return {
+      ...state,
+      searchedText
     }
   })
 );

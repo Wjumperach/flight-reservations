@@ -2,13 +2,17 @@
     <div class="row-container">
         <app-search
         [searchedText]="searchedText"
-        (changeSearchedText)="changeSearchedText($event)"></app-search>
+        (changeSearchedText)="setSearchedText($event)"></app-search>
     </div>
     <app-reservations-list
     [reservations]="searchedReservations"
+    [sort]="sort | async"
+    [pageInfo]="pageInfo | async"
     (openAddDialog)="openAddDialog()"
     (openUpdateDialog)="openUpdateDialog($event)"
-    (openDeleteDialog)="openDeleteDialog($event)"/>
+    (openDeleteDialog)="openDeleteDialog($event)"
+    (setPageInfo)="setPageInfo($event)"
+    (setSort)="setSort($event)"/>
 </ng-container>
 <ng-template #spinner>
     <div class="spinner-container">

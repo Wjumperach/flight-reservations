@@ -1,8 +1,8 @@
-<h2 mat-dialog-title class="title">{{error?.title}}</h2>
+<h2 mat-dialog-title class="title">{{problemDetails?.title ?? DialogTitles.ERROR}}</h2>
 <mat-dialog-content>
-  @for (error of (this.error | toErrorList); track error) {
+  @for (error of (this.problemDetails | toErrorList); track error) {
     <div>
-      {{ error.field }}: {{ error.message }}
+      {{ error.message }}
     </div>
   }
 </mat-dialog-content>

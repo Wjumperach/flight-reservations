@@ -14,10 +14,17 @@ public class FutureDateAttribute : ValidationAttribute
             }
             else
             {
-                return new ValidationResult(ErrorMessage ?? "The date must be today or in the future.");
+                return new ValidationResult(ErrorMessage ?? "The date must be today or in the future");
             }
         }
 
-        return new ValidationResult(ErrorMessage ?? "Invalid date format.");
+        if (value is string stringValue)
+        {
+            if (DateTime.TryParse(stringValue, out DateTime dateTime)) {
+                return IsValid(dateTime, validationContext); 
+            }  
+        }
+
+        return new ValidationResult(ErrorMessage ?? "Invalid date format");
     }
 }

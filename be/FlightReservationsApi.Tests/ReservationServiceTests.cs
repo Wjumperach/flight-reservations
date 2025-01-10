@@ -40,8 +40,8 @@ public class ReservationServiceTests
             FirstName = "John",
             LastName = "Doe",
             FlightNumber = "FN123",
-            DepartureDate = DateTime.Now,
-            ArrivalDate = DateTime.Now.AddHours(2),
+            DepartureDateTime = DateTime.Now,
+            ArrivalDateTime = DateTime.Now.AddHours(2),
             TicketClass = 0
         };
             
@@ -56,8 +56,8 @@ public class ReservationServiceTests
         Assert.Equal(reservation.FirstName, result.FirstName);
         Assert.Equal(reservation.LastName, result.LastName);
         Assert.Equal(reservation.FlightNumber, result.FlightNumber);
-        Assert.Equal(reservation.DepartureDate, result.DepartureDate);
-        Assert.Equal(reservation.ArrivalDate, result.ArrivalDate);
+        Assert.Equal(reservation.DepartureDateTime, result.DepartureDateTime);
+        Assert.Equal(reservation.ArrivalDateTime, result.ArrivalDateTime);
         Assert.Equal(reservation.TicketClass, result.TicketClass);
         _fileSystemMock.Verify(f => f.File.WriteAllTextAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<CancellationToken>()), Times.Once);
     }
@@ -73,8 +73,8 @@ public class ReservationServiceTests
             FirstName = "John",
             LastName = "Doe",
             FlightNumber = "FN123",
-            DepartureDate = DateTime.Now,
-            ArrivalDate = DateTime.Now.AddHours(2),
+            DepartureDateTime = DateTime.Now,
+            ArrivalDateTime = DateTime.Now.AddHours(2),
             TicketClass = TicketClass.ECONOMY
         };
 
@@ -84,8 +84,8 @@ public class ReservationServiceTests
             FirstName = "Jane",
             LastName = "Smith",
             FlightNumber = "FN456",
-            DepartureDate = DateTime.Now.AddDays(1),
-            ArrivalDate = DateTime.Now.AddDays(1).AddHours(2),
+            DepartureDateTime = DateTime.Now.AddDays(1),
+            ArrivalDateTime = DateTime.Now.AddDays(1).AddHours(2),
             TicketClass = TicketClass.BUSINESS
         };
 

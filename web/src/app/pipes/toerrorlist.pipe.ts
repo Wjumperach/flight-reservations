@@ -1,22 +1,22 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { Error } from '../models/error';
+import { ProblemDetails } from '../models/problemdetails';
 
 @Pipe({
     name: 'toErrorList',
     standalone: true,
 })
 export class ToErrorListPipe implements PipeTransform {
-    transform(error: Error | null): { field: string; message: string }[] {
-        if (!error){
+    transform(problemDetails: ProblemDetails | null): { field: string; message: string }[] {
+        if (!problemDetails){
             return [];
         }
 
-        if (!error.errors){
+        if (!problemDetails.errors){
             return [];
         }
 
-        const errors = Object.entries(error.errors).reduce(
+        const errors = Object.entries(problemDetails.errors).reduce(
             (acc, cur: [string, string[]]) => {
                 for (let err of cur[1]) {
                     acc.push({

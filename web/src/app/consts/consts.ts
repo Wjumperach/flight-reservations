@@ -13,8 +13,8 @@ export const ReservationFormFields = {
     FIRST_NAME: 'firstName',
     LAST_NAME: 'lastName',
     FLIGHT_NUMBER: 'flightNumber',
-    DEPARTURE_DATE: 'departureDate',
-    ARRIVAL_DATE: 'arrivalDate',
+    DEPARTURE_DATE_TIME: 'departureDateTime',
+    ARRIVAL_DATE_TIME: 'arrivalDateTime',
     TICKET_CLASS: 'ticketClass',
     ACTIONS: 'actions'
 };
@@ -24,8 +24,12 @@ export const ReservationTableHeaders = {
     FIRST_NAME: 'First name',
     LAST_NAME: 'Last name',
     FLIGHT_NUMBER: 'Flight number',
+    DEPARTURE_DATE_TIME: 'Departure date',
     DEPARTURE_DATE: 'Departure date',
+    DEPARTURE_TIME: 'Departure time',
+    ARRIVAL_DATE_TIME: 'Arrival date',
     ARRIVAL_DATE: 'Arrival date',
+    ARRIVAL_TIME: 'Arrival time',
     TICKET_CLASS: 'Ticket class',
     ACTIONS: 'Actions'
 }
@@ -58,5 +62,6 @@ export const ErrorMessages = {
     MIN_LENGTH: 'You must enter at least 2 letters',
     VALUE_NOT_VALID: 'The value is not valid',
     DEPARTURE_DATE_REQUIRED: 'You must enter departure date',
-    ARRIVAL_DATE_REQUIRED: 'You must enter arrival date'
+    ARRIVAL_DATE_REQUIRED: 'You must enter arrival date',
+    NOT_FROM_FUTURE: 'The date must be today or in the future.'
 }

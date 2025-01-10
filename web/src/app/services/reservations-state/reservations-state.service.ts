@@ -7,12 +7,15 @@ import { ReservationsState } from '../../ngrx/reducers/reservations.reducer';
 import {
   selectReservations,
   selectLoading,
-  selectError,
+  selectProblemDetails,
+  selectSort,
+  selectPageInfo,
   selectSearchedText,
   selectSearchedReservations
 } from '../../ngrx/selectors/reservations.selectors';
 import { ReservationsActions, OpenDialogActions, SearchActions } from '../../ngrx/actions/reservations.actions';
-import { Error } from '../../models/error';
+import { ProblemDetails } from '../../models/problemdetails';
+import { Sort } from '../../models/sort';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +25,9 @@ export class ReservationsStateService {
 
   reservations: Observable<Reservation[]> = this.store.select(selectReservations);
   loading: Observable<boolean> = this.store.select(selectLoading);
-  error: Observable<Error | null> = this.store.select(selectError);
+  problemDetails: Observable<ProblemDetails | null> = this.store.select(selectProblemDetails);
+  sort: Observable<Sort> = this.store.select(selectSort);
+  pageInfo: Observable<{ pageIndex: number, pageSize: number }> = this.store.select(selectPageInfo);
   searchedText: Observable<string | null | undefined> = this.store.select(selectSearchedText);
   searchedReservations: Observable<Reservation[]> = this.store.select(selectSearchedReservations);
 
@@ -59,8 +64,17 @@ export class ReservationsStateService {
     this.store.dispatch(ReservationsActions.delete({ reservation }));
   }
 
-  changeSearchedText(searchedText: string): void {
-    this.store.dispatch(SearchActions.changeText({ searchedText }));
+  setSort(sort: { active: string, direction: string }): void {
+    this.store.dispatch(ReservationsActions.sort({ sort })); 
+  }
+
+  setPageInfo(pageInfo: { pageIndex: number, pageSize: number }): void {
+    this.store.dispatch(ReservationsActions.setPageInfo({ pageInfo }));
+  }
+
+  setSearchedText(searchedText: string | null | undefined): void {
+    searchedText = searchedText ?? '';
+    this.store.dispatch(SearchActions.setSearchedText({ searchedText }));
   }
 
   private createDefaultReservation(): Reservation {
@@ -68,8 +82,8 @@ export class ReservationsStateService {
       firstName: '',
       lastName: '',
       flightNumber: '',
-      departureDate: null,
-      arrivalDate: null,
+      departureDateTime: null,
+      arrivalDateTime: null,
       ticketClass: null
     }
     return reservation;

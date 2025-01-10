@@ -10,3 +10,15 @@
 .flight-icon {
   padding-right: 16px;
 }
+.date-container {
+  width: 260px;
+}
+.time-container {
+  margin-left: 16px;
+  width: 180px;
+}
+.error {
+  font-size: 12px;
+  padding-left: 16px;
+  padding-right: 16px;
+}

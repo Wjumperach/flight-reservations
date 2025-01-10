@@ -3,7 +3,7 @@ export interface Reservation {
     firstName: string;
     lastName: string;
     flightNumber: string;
-    departureDate: Date | null;
-    arrivalDate: Date | null;
+    departureDateTime: string | null;
+    arrivalDateTime: string | null;
     ticketClass: number | null;
 }

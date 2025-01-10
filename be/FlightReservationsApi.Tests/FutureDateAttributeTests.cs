@@ -67,7 +67,7 @@ public class FutureDateAttributeTests
 
         // Assert
         Assert.NotNull(result);
-        Assert.Equal("The date must be today or in the future.", result.ErrorMessage);
+        Assert.Equal("The date must be today or in the future", result.ErrorMessage);
     }
 
     [Fact]
@@ -82,7 +82,7 @@ public class FutureDateAttributeTests
 
         // Assert
         Assert.NotNull(result);
-        Assert.Equal("Invalid date format.", result.ErrorMessage);
+        Assert.Equal("Invalid date format", result.ErrorMessage);
     }
 
     [Fact]
@@ -97,6 +97,6 @@ public class FutureDateAttributeTests
 
         // Assert
         Assert.NotNull(result);
-        Assert.Equal("Invalid date format.", result.ErrorMessage);
+        Assert.Equal("Invalid date format", result.ErrorMessage);
     }
 }

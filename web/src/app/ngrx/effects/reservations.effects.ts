@@ -1,7 +1,7 @@
 import { Injectable, inject, OnDestroy } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Subject, of, takeUntil } from 'rxjs';
-import { map, tap, catchError, exhaustMap } from 'rxjs/operators';
+import { map, catchError, exhaustMap } from 'rxjs/operators';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 import { ReservationsService } from '../../services/reservations/reservations.service';
@@ -12,7 +12,6 @@ import { DeleteDialogComponent } from '../../components/delete-dialog/delete-dia
 import { SuccessDialogComponent } from '../../components/success-dialog/success-dialog.component';
 import { ErrorDialogComponent } from '../../components/error-dialog/error-dialog.component';
 import { Messages } from '../../consts/consts';
-import { Error } from '../../models/error';
 
 @Injectable()
 export class ReservationsEffects implements OnDestroy {
@@ -32,7 +31,7 @@ export class ReservationsEffects implements OnDestroy {
     exhaustMap(() => this._reservationsService.getAll()
       .pipe(
         map((reservations: Reservation[]) => ReservationsActions.getAllSuccess({ reservations })),
-        catchError(error => of(ReservationsActions.getAllError({ error })))
+        catchError((error) => of(ReservationsActions.getAllError({ problemDetails: error.error})))
       )),
     )
   );
@@ -43,7 +42,7 @@ export class ReservationsEffects implements OnDestroy {
     exhaustMap((action) => this._reservationsService.getById(action.id)
       .pipe(
         map((reservation: Reservation) => ReservationsActions.getByIdSuccess({ reservation })),
-        catchError(error => of(ReservationsActions.getAllError({ error })))
+        catchError((error) => of(ReservationsActions.getByIdError({ problemDetails: error.error})))
       )),
     )
   );
@@ -110,7 +109,7 @@ export class ReservationsEffects implements OnDestroy {
     exhaustMap((action) => this._reservationsService.add(action.reservation)
       .pipe(
         map((reservation: Reservation) => ReservationsActions.addSuccess({ reservation })),
-        catchError(({ error }) => of(ReservationsActions.addError({ error })))
+        catchError((error) => of(ReservationsActions.addError({ problemDetails: error.error})))
       ))
     )
   );
@@ -122,7 +121,7 @@ export class ReservationsEffects implements OnDestroy {
 
   addReservationError$ = createEffect(() => this._actions$.pipe(
     ofType(ReservationsActions.addError),
-    map(({ error }) => OpenDialogActions.openErrorDialog({ error })),
+    map(({ problemDetails }) => OpenDialogActions.openErrorDialog({ problemDetails })),
   ));
 
   updateReservation$ = createEffect(() => this._actions$.pipe(
@@ -130,7 +129,7 @@ export class ReservationsEffects implements OnDestroy {
     exhaustMap((action) => this._reservationsService.update(action.reservation)
       .pipe(
         map(() => ReservationsActions.updateSuccess({ reservation: action.reservation })),
-        catchError(({ error }) => of(ReservationsActions.updateError({ error })))
+        catchError((error) => of(ReservationsActions.updateError({ problemDetails: error.error})))
       ))
     )
   );
@@ -142,7 +141,7 @@ export class ReservationsEffects implements OnDestroy {
 
   updateReservationError$ = createEffect(() => this._actions$.pipe(
     ofType(ReservationsActions.updateError),
-    map(({ error }) => OpenDialogActions.openErrorDialog({ error })),
+    map(({ problemDetails }) => OpenDialogActions.openErrorDialog({ problemDetails })),
   ));
 
   deleteReservation$ = createEffect(() => this._actions$.pipe(
@@ -150,7 +149,7 @@ export class ReservationsEffects implements OnDestroy {
     exhaustMap((action) => this._reservationsService.delete(action.reservation)
       .pipe(
         map(() => ReservationsActions.deleteSuccess({ id: action.reservation.id! })),
-        catchError(({ error }) => of(ReservationsActions.deleteError({ error })))
+        catchError((error) => of(ReservationsActions.deleteError({ problemDetails: error.error})))
       ))
     )
   );
@@ -162,7 +161,7 @@ export class ReservationsEffects implements OnDestroy {
 
   deleteReservationError$ = createEffect(() => this._actions$.pipe(
     ofType(ReservationsActions.deleteError),
-    map(({ error }) => OpenDialogActions.openErrorDialog({ error })),
+    map(({ problemDetails }) => OpenDialogActions.openErrorDialog({ problemDetails })),
   ));
 
   openSuccessDialog$ = createEffect(() => this._actions$.pipe(
@@ -180,9 +179,9 @@ export class ReservationsEffects implements OnDestroy {
   openErrorDialog$ = createEffect(() => this._actions$.pipe(
       ofType(OpenDialogActions.openErrorDialog),
       takeUntil(this._destroy$),
-      exhaustMap(({ error }) => {
+      exhaustMap(({ problemDetails }) => {
         const dialogRef: MatDialogRef<ErrorDialogComponent, any> = this._dialog.open(ErrorDialogComponent, {});
-        dialogRef.componentInstance.error = error;
+        dialogRef.componentInstance.problemDetails = problemDetails;
         return dialogRef.afterClosed();
       }),
       map(() => OpenDialogActions.actionCanceled()),

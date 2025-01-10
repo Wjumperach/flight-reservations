@@ -5,39 +5,39 @@
     <div class="button-container">
       <button mat-raised-button color="accent" (click)="addRow()" data-cy="addRow">{{ButtonNames.ADD}}</button>
     </div>
-    <table mat-table [dataSource]="dataSource" matSort>
+    <table mat-table [dataSource]="dataSource" matSort (matSortChange)="changeSort($event)">
         <ng-container matColumnDef="{{ReservationFormFields.ID}}" data-cy="id">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header class="title"> {{ReservationTableHeaders.ID}} </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ReservationTableHeaders.ID}} </th>
         <td mat-cell *matCellDef="let element"> {{element.id}} </td>
         </ng-container>
   
         <ng-container matColumnDef="{{ReservationFormFields.FIRST_NAME}}">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header class="title"> {{ReservationTableHeaders.FIRST_NAME}} </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ReservationTableHeaders.FIRST_NAME}} </th>
             <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
         </ng-container>
       
         <ng-container matColumnDef="{{ReservationFormFields.LAST_NAME}}">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header class="title"> {{ReservationTableHeaders.LAST_NAME}} </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ReservationTableHeaders.LAST_NAME}} </th>
             <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
         </ng-container>
 
         <ng-container matColumnDef="{{ReservationFormFields.FLIGHT_NUMBER}}">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header class="title"> {{ReservationTableHeaders.FLIGHT_NUMBER}} </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ReservationTableHeaders.FLIGHT_NUMBER}} </th>
             <td mat-cell *matCellDef="let element"> {{element.flightNumber}} </td>
         </ng-container>
 a
-        <ng-container matColumnDef="{{ReservationFormFields.DEPARTURE_DATE}}">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header class="title"> {{ReservationTableHeaders.DEPARTURE_DATE}} </th>
-            <td mat-cell *matCellDef="let element"><mat-icon color="primary">flight_takeoff</mat-icon> {{element.departureDate | date: DATE_FORMAT}} </td>
+        <ng-container matColumnDef="{{ReservationFormFields.DEPARTURE_DATE_TIME}}">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ReservationTableHeaders.DEPARTURE_DATE_TIME}} </th>
+            <td mat-cell *matCellDef="let element"><mat-icon fontIcon="flight_takeoff" color="primary"></mat-icon> {{element.departureDateTime | date: DATE_FORMAT}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="{{ReservationFormFields.ARRIVAL_DATE}}">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header class="title"> {{ReservationTableHeaders.ARRIVAL_DATE}} </th>
-            <td mat-cell *matCellDef="let element"><mat-icon color="primary">flight_land</mat-icon> {{element.arrivalDate | date: DATE_FORMAT}} </td>
+        <ng-container matColumnDef="{{ReservationFormFields.ARRIVAL_DATE_TIME}}">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ReservationTableHeaders.ARRIVAL_DATE_TIME}} </th>
+            <td mat-cell *matCellDef="let element"><mat-icon fontIcon="flight_land" color="primary"></mat-icon> {{element.arrivalDateTime | date: DATE_FORMAT}} </td>
         </ng-container>
 
         <ng-container matColumnDef="{{ReservationFormFields.TICKET_CLASS}}">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header class="title"> {{ReservationTableHeaders.TICKET_CLASS}} </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ReservationTableHeaders.TICKET_CLASS}} </th>
             <td mat-cell *matCellDef="let element"> {{element.ticketClass | toTicketClass }} </td>
         </ng-container>
   
@@ -61,8 +61,10 @@ a
         </tr>
   </table>
   <mat-paginator [length]="100"
-                [pageSize]="10"
-                [pageSizeOptions]="[5, 10, 25, 100]">
+                [pageIndex]="pageInfo?.pageIndex ?? 0"
+                [pageSize]="pageInfo?.pageSize ?? 10"
+                [pageSizeOptions]="[5, 10, 25, 100]"
+                (page)="changePageInfo($event)">
   </mat-paginator>
   </div>
   

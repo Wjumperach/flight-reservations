@@ -28,15 +28,15 @@ public class Reservation
     public string FlightNumber { get; set; } = string.Empty;
 
     [Required]
-    [DataType(DataType.Date)]
+    [DataType(DataType.DateTime)]
     [FutureDate]
-    public DateTime DepartureDate { get; set; }
+    public DateTime? DepartureDateTime { get; set; }
 
     [Required]
-    [DataType(DataType.Date)]
-    [DateGreaterThanOrEqual("DepartureDate")]
+    [DataType(DataType.DateTime)]
+    [DateGreaterThanOrEqualThan("DepartureDateTime")]
     [FutureDate]
-    public DateTime ArrivalDate { get; set; }
+    public DateTime? ArrivalDateTime { get; set; }
 
     [Required]
     [EnumDataType(typeof(TicketClass))] 

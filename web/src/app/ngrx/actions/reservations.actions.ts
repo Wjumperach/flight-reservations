@@ -1,26 +1,28 @@
 import { createActionGroup, props, emptyProps } from '@ngrx/store';
 
 import { Reservation } from '../../models/reservation';
-import { Error } from '../../models/error';
+import { ProblemDetails } from '../../models/problemdetails';
 
 export const ReservationsActions = createActionGroup({
   source: 'Reservations',
   events: {
     'Get all': emptyProps(),
     'Get all success': props<{ reservations: Reservation[] }>(),
-    'Get all error': props<{ error: Error }>(),
+    'Get all error': props<{ problemDetails: ProblemDetails }>(),
     'Get by id': props<{ id: number }>(),
     'Get by id success': props<{ reservation: Reservation }>(),
-    'Get by id error': props<{ error: Error }>(),
+    'Get by id error': props<{ problemDetails: ProblemDetails }>(),
     'Add': props<{ reservation: Reservation }>(),
     'Add success': props<{ reservation: Reservation }>(),
-    'Add error': props<{ error: Error }>(),
+    'Add error': props<{ problemDetails: ProblemDetails }>(),
     'Update': props<{ reservation: Reservation }>(),
     'Update success': props<{ reservation: Reservation }>(),
-    'Update error': props<{ error: Error }>(),
+    'Update error': props<{ problemDetails: ProblemDetails }>(),
     'Delete': props<{ reservation: Reservation }>(),
     'Delete success': props<{ id: number }>(),
-    'Delete error': props<{ error: Error }>(),
+    'Delete error': props<{ problemDetails: ProblemDetails }>(),
+    'Sort': props<{ sort: { active: string, direction: string }}>(),
+    'Set page info': props<{ pageInfo: { pageIndex: number, pageSize: number }}>()
   }
 });
 
@@ -31,7 +33,7 @@ export const OpenDialogActions = createActionGroup({
     'Open update dialog': props<{ reservation: Reservation }>(),
     'Open delete dialog': props<{ reservation: Reservation }>(),
     'Open success dialog': props<{ message: string }>(),
-    'Open error dialog': props<{ error: Error }>(),
+    'Open error dialog': props<{ problemDetails: ProblemDetails }>(),
     'Action canceled': emptyProps()
   }
 });
@@ -39,6 +41,6 @@ export const OpenDialogActions = createActionGroup({
 export const SearchActions = createActionGroup({
   source: 'Search',
   events: {
-    'Change text': props<{ searchedText: string }>()
+    'Set searched text': props<{ searchedText: string }>()
   }
 });

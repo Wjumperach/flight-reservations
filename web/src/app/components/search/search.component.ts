@@ -10,12 +10,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { SearchForm, SearchFormService } from '../../services/search-form/search-form.service';
 
 @Component({
-  selector: 'app-search',
-  standalone: true,
-  imports: [ ReactiveFormsModule, FormsModule, MatInputModule, MatSelectModule, MatFormFieldModule, MatIconModule ],
-  templateUrl: './search.component.html',
-  styleUrl: './search.component.css',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-search',
+    imports: [ReactiveFormsModule, FormsModule, MatInputModule, MatSelectModule, MatFormFieldModule, MatIconModule],
+    templateUrl: './search.component.html',
+    styleUrl: './search.component.css',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchComponent implements OnInit, OnDestroy {
   private _destroy$: Subject<void> = new Subject<void>();

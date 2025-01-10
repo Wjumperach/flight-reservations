@@ -6,11 +6,10 @@ import { Reservation } from '../../models/reservation';
 import { DialogTitles, Messages, ButtonNames } from '../../consts/consts';
 
 @Component({
-  selector: 'app-delete-dialog',
-  standalone: true,
-  imports: [ MatDialogModule, MatDialogClose, MatButtonModule ],
-  templateUrl: './delete-dialog.component.html',
-  styleUrl: './delete-dialog.component.css'
+    selector: 'app-delete-dialog',
+    imports: [MatDialogModule, MatDialogClose, MatButtonModule],
+    templateUrl: './delete-dialog.component.html',
+    styleUrl: './delete-dialog.component.css'
 })
 export class DeleteDialogComponent {
   private _dialogRef: MatDialogRef<DeleteDialogComponent, Reservation> = inject(MatDialogRef<DeleteDialogComponent>);
